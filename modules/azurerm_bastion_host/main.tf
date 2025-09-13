@@ -7,7 +7,7 @@ resource "azurerm_subnet" "bastion_subnet" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_bastion_host" "todo-bastion" {
+resource "azurerm_bastion_host" "evo-bastion" {
   name                = var.bastion_host_name
   location            = var.bastion_host_location
   resource_group_name = var.resource_group_name

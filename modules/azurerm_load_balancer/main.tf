@@ -17,7 +17,7 @@ resource "azurerm_lb_backend_address_pool" "lb-pool" {
 resource "azurerm_lb_probe" "lb-probe" {
   loadbalancer_id = azurerm_lb.todo-lb.id
   name            = "lb-probe"
-  port            = 22
+  port            = 80
 }
 
 resource "azurerm_lb_rule" "lb-pule" {
@@ -27,4 +27,6 @@ resource "azurerm_lb_rule" "lb-pule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "PublicIPAddress"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb-pool.id]
+  probe_id                       = azurerm_lb_probe.lb-probe.id
 }
