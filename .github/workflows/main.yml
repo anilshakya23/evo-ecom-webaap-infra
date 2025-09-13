@@ -1,4 +1,4 @@
-name: evo-ecom-webaap-infra
+name: "evo-ecom-webaap-infra"
 on:  workflow_dispatch
 permissions:
   id-token: write
