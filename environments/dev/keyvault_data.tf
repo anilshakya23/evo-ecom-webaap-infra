@@ -1,5 +1,5 @@
 data "azurerm_key_vault" "dev-keyvault" {
-  name                = "todokeyvault01"
+  name                = "todokeyvault02"
   resource_group_name = "rg-anil"
 }
 

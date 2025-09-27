@@ -25,7 +25,7 @@ module "dev-subnet" {
 }
 
 module "dev-nsg-vm-1" {
-  depends_on            = [module.dev-rg]
+  depends_on            = [module.dev-rg,]
   source                = "../../modules/azurerm_nsg"
   resource_nsg_name     = "dev-evo-ecom-webapp-nsg-1"
   resource_nsg_location = "East US"
@@ -33,7 +33,7 @@ module "dev-nsg-vm-1" {
 }
 
 module "dev-nsg-vm-2" {
-  depends_on            = [module.dev-rg]
+  depends_on            = [module.dev-rg,]
   source                = "../../modules/azurerm_nsg"
   resource_nsg_name     = "dev-evo-ecom-webapp-nsg-2"
   resource_nsg_location = "East US"
@@ -41,15 +41,15 @@ module "dev-nsg-vm-2" {
 }
 
 module "dev-vm-1" {
-  depends_on                     = [module.dev-rg, module.dev-vnet, module.dev-subnet, ]
+  depends_on                     = [module.dev-rg, module.dev-vnet, module.dev-subnet,module.dev-nsg-vm-1 ]
   source                         = "../../modules/azurerm_vm"
   network_interface_name         = "dev-evo-ecom-webapp-nic-1"
   network_interface_location     = "East US"
   resource_group_name            = "dev-evo-ecom-webapp-rg"
   linux_virtual_machine_name     = "dev-evo-ecom-webapp-vm-1"
   linux_virtual_machine_location = "East US"
-  admin_username_name            = data.azurerm_key_vault_secret.dev-vm-username.value
-  admin_password_name            = data.azurerm_key_vault_secret.dev-vm-password.value
+  admin_username_name            = "todovmuser"
+  admin_password_name            = "Shakyaneha50"
   subnet_name                    = "dev-evo-ecom-webapp-subnet"
   virtual_network_name           = "dev-evo-ecom-webapp-vnet"
   publisher_image                = "Canonical"
@@ -61,15 +61,15 @@ module "dev-vm-1" {
 }
 
 module "dev-vm-2" {
-  depends_on                     = [module.dev-rg, module.dev-vnet, module.dev-subnet, ]
+  depends_on                     = [module.dev-rg, module.dev-vnet, module.dev-subnet, module.dev-nsg-vm-2 ]
   source                         = "../../modules/azurerm_vm"
   network_interface_name         = "dev-evo-ecom-webapp-nic-2"
   network_interface_location     = "East US"
   resource_group_name            = "dev-evo-ecom-webapp-rg"
   linux_virtual_machine_name     = "dev-evo-ecom-webapp-vm-2"
   linux_virtual_machine_location = "East US"
-  admin_username_name            = data.azurerm_key_vault_secret.dev-vm-username.value
-  admin_password_name            = data.azurerm_key_vault_secret.dev-vm-password.value
+  admin_username_name            = "todovmuser"
+  admin_password_name            = "Shakyaneha50"
   subnet_name                    = "dev-evo-ecom-webapp-subnet"
   virtual_network_name           = "dev-evo-ecom-webapp-vnet"
   publisher_image                = "Canonical"
