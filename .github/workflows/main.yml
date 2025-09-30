@@ -9,6 +9,7 @@ jobs:
     runs-on: HP
     
     steps:
+      
       - name: Checkout
         uses: actions/checkout@v5.0.0
 
@@ -20,22 +21,29 @@ jobs:
           subscription-id: 51a6ae71-472e-4922-8df6-0a01fa72534d
       
       - name: Terraform fmt
+        working-directory: environments/dev
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
       
       - name: Terraform Init
+        working-directory: environments/dev
         id: init
         run: terraform init -input=false
+        
       
       - name: Terraform Validate
+        working-directory: environments/dev
         id: validate
         run: terraform validate -no-color
       
+      
       - name: Terraform Plan
+        working-directory: environments/dev
         id: plan
         run: terraform plan -no-color -input=false
-        continue-on-error: true    
+        continue-on-error: true
+        
 
   terraforn_scaning:
     runs-on: HP
