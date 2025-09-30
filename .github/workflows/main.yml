@@ -46,19 +46,12 @@ jobs:
         
 
   terraforn_scaning:
-    runs-on: HP
+    runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
-
-      - name: Azure login
-        uses: Azure/login@v2.3.0
-        with:
-          client-id: a2379b8f-962a-4d67-a050-887257ac66d4
-          tenant-id: b359a621-bb6d-4038-9c93-604ca0b824a1
-          subscription-id: 51a6ae71-472e-4922-8df6-0a01fa72534d
-      
+        
       - name: tfsec action
         uses: actions/checkout@master
       - name: tfsec
