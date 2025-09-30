@@ -48,8 +48,8 @@ module "dev-vm-1" {
   resource_group_name            = "dev-evo-ecom-webapp-rg"
   linux_virtual_machine_name     = "dev-evo-ecom-webapp-vm-1"
   linux_virtual_machine_location = "East US"
-  admin_username_name            = "todovmuser"
-  admin_password_name            = "Shakyaneha50"
+  admin_username_name            =  data.azurerm_key_vault_secret.dev-vm-username.value
+  admin_password_name            =  data.azurerm_key_vault_secret.dev-vm-password.value
   subnet_name                    = "dev-evo-ecom-webapp-subnet"
   virtual_network_name           = "dev-evo-ecom-webapp-vnet"
   publisher_image                = "Canonical"
@@ -68,8 +68,8 @@ module "dev-vm-2" {
   resource_group_name            = "dev-evo-ecom-webapp-rg"
   linux_virtual_machine_name     = "dev-evo-ecom-webapp-vm-2"
   linux_virtual_machine_location = "East US"
-  admin_username_name            = "todovmuser"
-  admin_password_name            = "Shakyaneha50"
+  admin_username_name            = data.azurerm_key_vault_secret.dev-vm-username.value
+  admin_password_name            = data.azurerm_key_vault_secret.dev-vm-password.value
   subnet_name                    = "dev-evo-ecom-webapp-subnet"
   virtual_network_name           = "dev-evo-ecom-webapp-vnet"
   publisher_image                = "Canonical"
