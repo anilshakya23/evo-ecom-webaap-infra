@@ -81,7 +81,7 @@ jobs:
       - name: Terraform apply
         working-directory: environments/dev
         id: apply
-        run: terraform plan -auto-approve
+        run: terraform apply -auto-approve
         continue-on-error: true
  
 
