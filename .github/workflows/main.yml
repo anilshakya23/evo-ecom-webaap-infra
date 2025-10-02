@@ -57,6 +57,33 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
 
+  terraforn_apply:
+    runs-on: HP
+    
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+    
+      - name: Azure login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: a2379b8f-962a-4d67-a050-887257ac66d4
+          tenant-id: b359a621-bb6d-4038-9c93-604ca0b824a1
+          subscription-id: 51a6ae71-472e-4922-8df6-0a01fa72534d
+
+      - name: Terraform Init
+        working-directory: environments/dev
+        id: init
+        run: terraform init -input=false
+
+      - name: Terraform apply
+        working-directory: environments/dev
+        id: apply
+        run: terraform plan --auto-approved
+        continue-on-error: true
+ 
+
        
 
        
