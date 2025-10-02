@@ -58,6 +58,7 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
 
   terraforn_apply:
+    needs: terraforn_init_plan
     runs-on: HP
     
     steps:
@@ -80,7 +81,7 @@ jobs:
       - name: Terraform apply
         working-directory: environments/dev
         id: apply
-        run: terraform plan --auto-approved
+        run: terraform plan -auto-approve
         continue-on-error: true
  
 
